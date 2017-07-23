@@ -16,35 +16,35 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
 /**
- * @author Khalid Moharrum <khalid.moharram@gmail.com>
+ * @author Lajos Veres <lajos.veres@gmail.com>
  */
-class CreateCitiesMigrationCommand extends Command
+class CreateRegionsMigrationCommand extends Command
 {
     /**
      * The name of the console command.
      *
      * @var string
      */
-    protected $name = 'cities:migration';
+    protected $name = 'regions:migration';
 
     /**
      * The signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cities:migration';
+    protected $signature = 'regions:migration';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create the cities table migration file.';
+    protected $description = 'Create the regions table migration file.';
 
     /**
      * @var string The migration file name.
      */
-    public $migration_file = '2016_03_10_114715_create_cities_table.php';
+    public $migration_file = '2017_07_23_171615_create_regions_table.php';
 
     /**
      * Create a new command instance.

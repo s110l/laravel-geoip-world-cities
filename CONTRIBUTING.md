@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/moharrum/laravel-geoip-world-cities).
+We accept contributions via Pull Requests on [Github](https://github.com/s110l/laravel-geoip-world-cities).
 
 
 ## Pull Requests

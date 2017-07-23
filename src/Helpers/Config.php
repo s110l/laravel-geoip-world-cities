@@ -1,13 +1,13 @@
 <?php
 
-namespace Moharrum\LaravelGeoIPWorldCities\Helpers;
+namespace S110L\LaravelGeoIPWorldCities\Helpers;
 
 /*
- * \Moharrum\LaravelGeoIPWorldCities for Laravel 5
+ * \S110L\LaravelGeoIPWorldCities for Laravel 5
  *
  * Copyright (c) 2015 - 2017 LaravelGeoIPWorldCities
  *
- * @copyright  Copyright (c) 2015 - 2017 \Moharrum\LaravelGeoIPWorldCities
+ * @copyright  Copyright (c) 2015 - 2017 \S110L\LaravelGeoIPWorldCities
  * 
  * @license http://opensource.org/licenses/MIT MIT license
  */
@@ -25,6 +25,16 @@ class Config
     public static function citiesTableName()
     {
         return config('cities.table');
+    }
+
+    /**
+     * Returns the regions table name from config files.
+     * 
+     * @return string
+     */
+    public static function regionsTableName()
+    {
+        return config('regions.table');
     }
 
     /**

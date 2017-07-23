@@ -15,9 +15,9 @@ use Illuminate\Database\Migrations\Migration;
 use S110L\LaravelGeoIPWorldCities\Helpers\Config;
 
 /**
- * @author Khalid Moharrum <khalid.moharram@gmail.com>
+ * @author Lajos Veres <lajos.veres@gmail.com>
  */
-class CreateCitiesTable extends Migration
+class CreateRegionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -26,37 +26,24 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create(Config::citiesTableName(), function (Blueprint $table) {
+        Schema::create(Config::regionsTableName(), function (Blueprint $table) {
             $table->increments('id');
             
             $table->char('country', 2)
                     ->nullable();
             
-            $table->string('city')
-                    ->nullable()
-                    ->collation('utf8_unicode_ci');
-            
-            $table->string('city_ascii')
-                    ->nullable();
-            
             $table->char('region', 2)
                     ->nullable();
-
-            $table->integer('population')
+            
+            $table->string('name')
                     ->nullable()
-                    ->unsigned();
-
-            $table->decimal('latitude', 10, 6)
-                    ->nullable();
-
-            $table->decimal('longitude', 10, 6)
-                    ->nullable();
+                    ->collation('utf8_unicode_ci');
             
             $table->index('country', 'idx_country');
             
             $table->index('region', 'idx_region');
             
-            $table->index(['latitude', 'longitude'], 'idx_lat_long');
+            $table->index('name', 'idx_name');
             
             $table->timestamps = false;
         });
@@ -69,6 +56,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(Config::citiesTableName());
+        Schema::drop(Config::regionsTableName());
     }
 }

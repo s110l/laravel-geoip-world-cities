@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\File;
 use S110L\LaravelGeoIPWorldCities\Helpers\Config;
 
 /**
- * @author Khalid Moharrum <khalid.moharram@gmail.com>
+ * @author Lajos Veres <lajos.veres@gmail.com>
  */
-class CitiesTableSeeder extends Seeder
+class RegionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -31,16 +31,12 @@ class CitiesTableSeeder extends Seeder
 
             $query = "LOAD DATA LOCAL INFILE '"
                     . str_replace('\\', '/', $dumpPart) . "'
-                    INTO TABLE `" . Config::citiesTableName() . "` 
-                        FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"'
+                    INTO TABLE `" . Config::regionsTableName() . "` 
+                        FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '\"'
                         LINES TERMINATED BY '\n' IGNORE 1 LINES
                         (country,
-                        city_ascii,
-                        city,
                         region,
-                        population,
-                        latitude,
-                        longitude
+                        name
                     )";
 
             DB::connection()->getpdo()->exec($query);
@@ -58,10 +54,10 @@ class CitiesTableSeeder extends Seeder
         $files = [];
 
         foreach(File::allFiles(Config::dumpPath()) as $dumpFile) {
-            if ( substr( File::basename( $file = $dumpFile->getRealpath() ), 0, 1 ) !== 'p' ) {
+            if ( substr( File::basename( $file = $dumpFile->getRealpath() ), 0, 1 ) !== 'r' ) {
                 continue;
             }
-            $files[] = $file;
+            $files[] = $file();
         }
 
         sort($files);

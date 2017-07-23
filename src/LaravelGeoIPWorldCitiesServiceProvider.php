@@ -1,20 +1,20 @@
 <?php
 
-namespace Moharrum\LaravelGeoIPWorldCities;
+namespace S110L\LaravelGeoIPWorldCities;
 
 /*
- * \Moharrum\LaravelGeoIPWorldCities for Laravel 5
+ * \S110L\LaravelGeoIPWorldCities for Laravel 5
  *
  * Copyright (c) 2015 - 2017 LaravelGeoIPWorldCities
  *
- * @copyright  Copyright (c) 2015 - 2017 \Moharrum\LaravelGeoIPWorldCities
+ * @copyright  Copyright (c) 2015 - 2017 \S110L\LaravelGeoIPWorldCities
  * 
  * @license http://opensource.org/licenses/MIT MIT license
  */
 
 use Illuminate\Support\ServiceProvider;
-use Moharrum\LaravelGeoIPWorldCities\Console\CreateCitiesSeederCommand;
-use Moharrum\LaravelGeoIPWorldCities\Console\CreateCitiesMigrationCommand;
+use S110L\LaravelGeoIPWorldCities\Console\CreateCitiesSeederCommand;
+use S110L\LaravelGeoIPWorldCities\Console\CreateCitiesMigrationCommand;
 
 /**
  * @author Khalid Moharrum <khalid.moharram@gmail.com>
@@ -60,7 +60,8 @@ class LaravelGeoIPWorldCitiesServiceProvider extends ServiceProvider
     private function publishConfig()
     {
         $this->publishes([
-            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php' => config_path('cities.php')
+            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php' => config_path('cities.php'),
+            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'regions_config.php' => config_path('regions.php'),
         ]);
     }
 
@@ -82,6 +83,18 @@ class LaravelGeoIPWorldCitiesServiceProvider extends ServiceProvider
         $this->app['cities'] = $this->app->share(function ($app) {
             return new City;
         });
+
+        if(((double) $thisApp::VERSION) === 5.4) {
+            $this->app->singleton('regions', function ($app) {
+                return new Region;
+            });
+
+            return;
+        }
+
+        $this->app['regions'] = $this->app->share(function ($app) {
+            return new Region;
+        });
     }
 
     /**
@@ -92,6 +105,11 @@ class LaravelGeoIPWorldCitiesServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php',
             'cities'
+        );
+        
+        $this->mergeConfigFrom(
+            __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'regions_config.php',
+            'regions'
         );
     }
 
@@ -113,6 +131,18 @@ class LaravelGeoIPWorldCitiesServiceProvider extends ServiceProvider
         }
 
         $this->commands('command.cities.migration');
+
+        if(((double) $thisApp::VERSION) === 5.4) {
+            $this->app->singleton('command.regions.migration', function ($app) {
+                return new CreateRegionsMigrationCommand;
+            });
+        } else {
+            $this->app['command.regions.migration'] = $this->app->share(function($app) {
+                return new CreateRegionsMigrationCommand;
+            });
+        }
+
+        $this->commands('command.regions.migration');
     }
 
     /**
@@ -133,6 +163,18 @@ class LaravelGeoIPWorldCitiesServiceProvider extends ServiceProvider
         }
 
         $this->commands('command.cities.seeder');
+
+        if(((double) $thisApp::VERSION) === 5.4) {
+            $this->app->singleton('command.regions.seeder', function ($app) {
+                return new CreateRegionsSeederCommand;
+            });
+        } else {
+            $this->app['command.regions.seeder'] = $this->app->share(function($app) {
+                return new CreateRegionsSeederCommand;
+            });
+        }
+
+        $this->commands('command.regions.seeder');
     }
 
     /**
@@ -142,6 +184,6 @@ class LaravelGeoIPWorldCitiesServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['cities'];
+        return ['cities','regions'];
     }
 }

@@ -4,14 +4,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cities Table Name
+    | Regions Table Name
     |--------------------------------------------------------------------------
     |
-    | Below, you may change the default table cities name.
+    | Below, you may change the default table regions name.
     |
     */
 
-    'table' => 'cities',
-    'regionstable' => 'regions',
+    'table' => 'regions',
 
 ];

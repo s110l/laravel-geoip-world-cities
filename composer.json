@@ -1,9 +1,9 @@
 {
-    "name": "moharrum/laravel-geoip-world-cities",
+    "name": "s110l/laravel-geoip-world-cities",
     "type": "library",
     "description": "Laravel GeoIP World Cities provides MaxMind Free World Cities Database for laravel applications.",
     "keywords": [
-        "moharrum",
+        "s110l",
         "laravel-geoip-world-cities",
         "Laravel",
         "world-cities",
@@ -12,13 +12,13 @@
         "worldcitiespop",
         "maxmind-free-world-cities-database"
     ],
-    "homepage": "https://github.com/moharrum/laravel-geoip-world-cities",
+    "homepage": "https://github.com/s110l/laravel-geoip-world-cities",
     "license": "MIT",
     "authors": [
         {
-            "name": "Khalid Moharrum",
-            "email": "khalid.moharram@gmail.com",
-            "homepage": "https://github.com/moharrum/",
+            "name": "Lajos Veres",
+            "email": "lajos.veres@gmail.com",
+            "homepage": "https://github.com/s110l/",
             "role": "Developer"
         }
     ],
@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Moharrum\\LaravelGeoIPWorldCities\\": "src"
+            "S110L\\LaravelGeoIPWorldCities\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Moharrum\\LaravelGeoIPWorldCities\\": "tests"
+            "S110L\\LaravelGeoIPWorldCities\\": "tests"
         }
     },
     "scripts": {
@@ -46,8 +46,8 @@
         "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
     },
     "support" : {
-            "source" : "https://github.com/moharrum/laravel-geoip-world-cities",
-            "issues" : "https://github.com/moharrum/laravel-geoip-world-cities/issues"
+            "source" : "https://github.com/s110l/laravel-geoip-world-cities",
+            "issues" : "https://github.com/s110l/laravel-geoip-world-cities/issues"
     },
     "config": {
         "sort-packages": true

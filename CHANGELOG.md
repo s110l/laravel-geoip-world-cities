@@ -1,6 +1,10 @@
 # Changelog
 
-All Notable changes to `moharrum/laravel-geoip-world-cities/releases` will be documented in this file.
+All Notable changes to `s110l/laravel-geoip-world-cities/releases` will be documented in this file.
+
+## 2.4 - 2017-07-23
+
+Adding Regions
 
 ## 2.3 - 2017-02-11
 

@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\Model;
 use S110L\LaravelGeoIPWorldCities\Helpers\Config;
 
 /**
- * @author Khalid Moharrum <khalid.moharram@gmail.com>
+ * @author Lajos Veres <lajos.veres@gmail.com>
  */
-class City extends Model
+class Region extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -27,12 +27,8 @@ class City extends Model
      */
     protected $fillable = [
         'country',
-        'city',
-        'city_ascii',
         'region',
-        'population',
-        'latitude',
-        'longitude',
+        'name',
     ];
 
     /**
@@ -43,7 +39,7 @@ class City extends Model
     protected $hidden = ['id'];
 
     /**
-     * Create a new City instance.
+     * Create a new Region instance.
      * 
      * @param array $attributes
      */
@@ -51,6 +47,6 @@ class City extends Model
     {
         parent::__construct($attributes);
 
-        $this->table = Config::citiesTableName();
+        $this->table = Config::regionsTableName();
     }
 }

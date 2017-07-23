@@ -1,13 +1,13 @@
 <?php
 
-namespace Moharrum\LaravelGeoIPWorldCities;
+namespace S110L\LaravelGeoIPWorldCities;
 
 /*
- * \Moharrum\LaravelGeoIPWorldCities for Laravel 5
+ * \S110L\LaravelGeoIPWorldCities for Laravel 5
  *
  * Copyright (c) 2015 - 2017 LaravelGeoIPWorldCities
  *
- * @copyright  Copyright (c) 2015 - 2017 \Moharrum\LaravelGeoIPWorldCities
+ * @copyright  Copyright (c) 2015 - 2017 \S110L\LaravelGeoIPWorldCities
  * 
  * @license http://opensource.org/licenses/MIT MIT license
  */

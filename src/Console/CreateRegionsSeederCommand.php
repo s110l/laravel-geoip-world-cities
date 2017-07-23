@@ -16,35 +16,35 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
 /**
- * @author Khalid Moharrum <khalid.moharram@gmail.com>
+ * @author Lajos Veres <lajos.veres@gmail.com>
  */
-class CreateCitiesMigrationCommand extends Command
+class CreateRegionsSeederCommand extends Command
 {
     /**
      * The name of the console command.
      *
      * @var string
      */
-    protected $name = 'cities:migration';
+    protected $name = 'regions:seeder';
 
     /**
      * The signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cities:migration';
+    protected $signature = 'regions:seeder';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create the cities table migration file.';
+    protected $description = 'Create the regions table seeder.';
 
     /**
-     * @var string The migration file name.
+     * @var string The seeder file name.
      */
-    public $migration_file = '2016_03_10_114715_create_cities_table.php';
+    public $seeder_file = 'RegionsTableSeeder.php';
 
     /**
      * Create a new command instance.
@@ -65,28 +65,36 @@ class CreateCitiesMigrationCommand extends Command
     {
         $exists = false;
 
-        if (File::exists($this->publishedMigrationRealpath())) {
+        if (File::exists($this->publishedSeederRealpath())) {
             $exists = true;
 
-            if (!$this->confirm('The migration file already exists, overwrite it? [Yes|no]')) {
+            if (!$this->confirm('The seeder file already exists, overwrite it? [Yes|no]')) {
                 return $this->info('Okay, no changes made to the file.');
             }
         }
 
-        $inputFile = file_get_contents($this->localMigrationRealpath());
+        try {
+            if(! $exists) {
+                $this->callSilent('make:seed', ['name' => substr($this->seeder_file, 0, strpos($this->seeder_file, '.'))]);
+            }
+        } catch (\Exception $ex) {
 
-        $outputFile = fopen($this->publishedMigrationRealpath(), 'w');
+        }
+
+        $inputFile = file_get_contents($this->localSeederPath());
+
+        $outputFile = fopen($this->publishedSeederRealpath(), 'w');
 
         if ($inputFile && $outputFile) {
             fwrite($outputFile, $inputFile);
 
             fclose($outputFile);
         } else {
-            File::delete($this->publishedMigrationRealpath());
+            File::delete($this->publishedSeederRealpath());
 
             return $this->error(
-                        'There was an error creating the migration file, '
-                        .'check write permissions for ' . base_path('database') . DIRECTORY_SEPARATOR . 'migrations'
+                        'There was an error creating the seeder file, '
+                        .'check write permissions for ' . base_path('database') . DIRECTORY_SEPARATOR . 'seeds'
                         .PHP_EOL
                         .PHP_EOL
                         .'If you think this is a bug, please submit a bug report '
@@ -95,43 +103,43 @@ class CreateCitiesMigrationCommand extends Command
         }
 
         if(! $exists) {
-            $this->info('Okay, migration file created successfully.');
+            $this->info('Okay, seeder file created successfully.');
 
             return;
         }
 
-        $this->info('Okay, migration file overwritten successfully.');
+        $this->info('Okay, seeder file overwritten successfully.');
     }
 
     /**
-     * Returns the full path to the local migration file.
+     * Returns the full path to the local seeder file.
      * 
      * @return string
      */
-    protected function localMigrationRealpath()
+    protected function localSeederPath()
     {
         return __DIR__
                 . DIRECTORY_SEPARATOR
                 . '..'
                 . DIRECTORY_SEPARATOR
-                . 'migrations'
+                . 'seeds'
                 . DIRECTORY_SEPARATOR
-                . $this->migration_file;
+                . $this->seeder_file;
     }
 
     /**
-     * Returns the full path to the published migration file.
+     * Returns the full path to the published seeder file.
      * 
      * @return string
      */
-    protected function publishedMigrationRealpath()
+    protected function publishedSeederRealpath()
     {
         return base_path(
                 'database'
                 . DIRECTORY_SEPARATOR
-                . 'migrations'
+                . 'seeds'
                 . DIRECTORY_SEPARATOR
-                . $this->migration_file
+                . $this->seeder_file
             );
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Moharrum\LaravelGeoIPWorldCities\Console;
+namespace S110L\LaravelGeoIPWorldCities\Console;
 
 /*
- * \Moharrum\LaravelGeoIPWorldCities for Laravel 5
+ * \S110L\LaravelGeoIPWorldCities for Laravel 5
  *
  * Copyright (c) 2015 - 2017 LaravelGeoIPWorldCities
  *
- * @copyright  Copyright (c) 2015 - 2017 \Moharrum\LaravelGeoIPWorldCities
+ * @copyright  Copyright (c) 2015 - 2017 \S110L\LaravelGeoIPWorldCities
  * 
  * @license http://opensource.org/licenses/MIT MIT license
  */
@@ -98,7 +98,7 @@ class CreateCitiesSeederCommand extends Command
                         .PHP_EOL
                         .PHP_EOL
                         .'If you think this is a bug, please submit a bug report '
-                        .'at https://github.com/moharrum/laravel-geoip-world-cities/issues'
+                        .'at https://github.com/s110l/laravel-geoip-world-cities/issues'
                     );
         }
 

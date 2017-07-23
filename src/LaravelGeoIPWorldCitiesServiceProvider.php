@@ -15,6 +15,8 @@ namespace S110L\LaravelGeoIPWorldCities;
 use Illuminate\Support\ServiceProvider;
 use S110L\LaravelGeoIPWorldCities\Console\CreateCitiesSeederCommand;
 use S110L\LaravelGeoIPWorldCities\Console\CreateCitiesMigrationCommand;
+use S110L\LaravelGeoIPWorldCities\Console\CreateRegionsSeederCommand;
+use S110L\LaravelGeoIPWorldCities\Console\CreateRegionsMigrationCommand;
 
 /**
  * @author Khalid Moharrum <khalid.moharram@gmail.com>

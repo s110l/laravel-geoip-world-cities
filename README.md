@@ -27,6 +27,8 @@ Includes city, region, country, latitude and longitude. This database doesn't co
 
 This package simply loads the data provided in `worldcitiespop.txt.gz` file by [MaxMind](https://www.maxmind.com/) into a database and provides a `City` model to query the table.
 
+The regions downloaded from http://www.maxmind.com/download/geoip/misc/region_codes.csv and the IDs are compatible with `region` field in `cities` table.
+
 ## Before installing
 
 If you are looking for the Laravel 4 version, take a look [Branch 1.0](https://github.com/s110l/laravel-geoip-world-cities/tree/1.0).
@@ -79,6 +81,8 @@ Publishing the migration and seeder files
 
     php artisan cities:migration
     php artisan cities:seeder
+    php artisan regions:migration
+    php artisan regions:seeder
 
 To make sure the data is seeded insert the following code in `seeds/DatabaseSeeder.php`
 
@@ -86,13 +90,15 @@ To make sure the data is seeded insert the following code in `seeds/DatabaseSeed
     // Seeding the cities
     $this->call(CitiesTableSeeder::class);
     $this->command->info('Seeded the cities table ...'); 
+    $this->call(RegionsTableSeeder::class);
+    $this->command->info('Seeded the regions table ...'); 
 ```
 
 You may now run:
 
     php artisan migrate --seed
     
-After running this command the filled cities table will be available
+After running this command the filled cities and regions tables will be available
 
 ## Table structure
 
@@ -104,10 +110,11 @@ After running this command the filled cities table will be available
 
 ## Example
 
-The package provides a `City` model which can be used to query the data
+The package provides the `City` and `Region` model which can be used to query the data
 
 ```php
     \S110L\LaravelGeoIPWorldCities\City::whereCity('Khartoum')->first();
+    \S110L\LaravelGeoIPWorldCities\Region::whereCountry('hu')->get();
 ```
 
 ## Troubleshooting

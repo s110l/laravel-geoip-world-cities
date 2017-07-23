@@ -57,7 +57,7 @@ class RegionsTableSeeder extends Seeder
             if ( substr( File::basename( $file = $dumpFile->getRealpath() ), 0, 1 ) !== 'r' ) {
                 continue;
             }
-            $files[] = $file();
+            $files[] = $file;
         }
 
         sort($files);

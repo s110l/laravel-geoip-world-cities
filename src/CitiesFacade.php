@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Facade as IlluminateFacade;
 /**
  * @author Khalid Moharrum <khalid.moharram@gmail.com>
  */
-class Facade extends IlluminateFacade
+class CitiesFacade extends IlluminateFacade
 {
     protected static function getFacadeAccessor()
     {

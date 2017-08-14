@@ -61,7 +61,8 @@ Optionally add the alias.
 
 ```php
     'aliases' => [
-        'Cities' => S110L\LaravelGeoIPWorldCities\Facade::class,
+        'Cities' => S110L\LaravelGeoIPWorldCities\CitiesFacade::class,
+        'Regions' => S110L\LaravelGeoIPWorldCities\RegionsFacade::class,
     ]
 ```
 

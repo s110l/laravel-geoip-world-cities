@@ -78,22 +78,18 @@ class LaravelGeoIPWorldCitiesServiceProvider extends ServiceProvider
             $this->app->singleton('cities', function ($app) {
                 return new City;
             });
-
-            return;
-        }
-
-        $this->app['cities'] = $this->app->share(function ($app) {
-            return new City;
-        });
-
-        if(((double) $thisApp::VERSION) === 5.4) {
+            
             $this->app->singleton('regions', function ($app) {
                 return new Region;
             });
-
+            
             return;
         }
-
+        
+        $this->app['cities'] = $this->app->share(function ($app) {
+            return new City;
+        });
+        
         $this->app['regions'] = $this->app->share(function ($app) {
             return new Region;
         });
